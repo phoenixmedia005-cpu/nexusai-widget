@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NexusAI Widget Test Page</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#0a0a14;color:#fff;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:20px;text-align:center;padding:24px}
+    h1{font-size:28px;font-weight:900;background:linear-gradient(135deg,#f97316,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    p{color:rgba(255,255,255,0.4);font-size:14px;max-width:400px;line-height:1.7}
+    .badge{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);color:#4ade80;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:600}
+    .arrow{position:fixed;bottom:100px;right:90px;font-size:30px;animation:bounce 1s infinite}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  </style>
+</head>
+<body>
+  <div class="badge">🟢 NexusAI Widget — Live Demo</div>
+  <h1>Your AI Sales Agent<br/>is running below 👇</h1>
+  <p>Click the orange chat bubble in the bottom-right corner to start a conversation. This is exactly what your clients' website visitors will see.</p>
+  <p style="color:rgba(255,255,255,0.2);font-size:12px">Widget ID: phoenixmedia_lvfjp1</p>
+  <div class="arrow">👉</div>
+
+  <!-- NexusAI Sales Agent Widget -->
+  <script>
+  (function() {
+    window.__NEXUSAI_WIDGET_ID__ = "phoenixmedia_lvfjp1";
+    var s = document.createElement("script");
+    s.src = "https://phoenixmedia005-cpu.github.io/nexusai-widget/widget.js?widget_id=phoenixmedia_lvfjp1";
+    s.async = true;
+    document.head.appendChild(s);
+  })();
+  </script>
+</body>
+</html>
