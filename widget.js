@@ -17,7 +17,7 @@
   var scriptSrc = scriptTag ? scriptTag.src : '';
   var urlParams = new URLSearchParams(scriptSrc.split('?')[1] || '');
   var WIDGET_ID = window.__NEXUSAI_WIDGET_ID__ || urlParams.get('widget_id') || 'default';
-  var API_BASE = 'https://nexusai-dashboard-phoenix.netlify.app/.netlify/functions';
+  var API_BASE = 'https://nexusai-chat-api.phoenixmedia005-cpu.workers.dev';
   var PRIMARY = '#f97316';
   var AGENT_NAME = 'Nova';
   var sessionId = 'sess_' + Math.random().toString(36).slice(2, 10);
