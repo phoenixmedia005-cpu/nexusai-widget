@@ -617,7 +617,7 @@
           <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Lead dashboard</li>
           <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Standard support</li>
         </ul>
-        <a href="https://wa.me/256704923640?text=Hi!%20I%27d%20like%20the%20Starter%20plan%20for%20Blaze256" target="_blank" class="plan-cta ghost" onclick="naiTrack('plan_click','pricing','starter')">Get Started</a>
+        <button class="plan-cta ghost" onclick="naiTrack('plan_click','pricing','starter');openPayModal('Starter',300000)">Get Started</button>
       </div>
       <div class="plan featured">
         <div class="plan-badge">⚡ Most Popular</div>
@@ -636,7 +636,7 @@
           <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Automated follow-ups</li>
           <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
         </ul>
-        <a href="https://wa.me/256704923640?text=Hi!%20I%27d%20like%20the%20Growth%20plan%20for%20Blaze256" target="_blank" class="plan-cta solid" onclick="naiTrack('plan_click','pricing','growth')">Get Started</a>
+        <button class="plan-cta solid" onclick="naiTrack('plan_click','pricing','growth');openPayModal('Growth',500000)">Get Started</button>
       </div>
       <div class="plan">
         <div class="plan-tier">Enterprise</div>
@@ -777,5 +777,178 @@ function copyCode() {
   });
 }
 </script>
+
+<!-- ========== PAYMENT MODAL ========== -->
+<div id="payModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+  <div style="background:#13131f;border:1px solid rgba(249,115,22,0.3);border-radius:20px;padding:36px;width:100%;max-width:480px;margin:20px;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="closePayModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.08);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">✕</button>
+    
+    <!-- Step 1: Form -->
+    <div id="payStep1">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#f97316,#ec4899);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;">🔥</div>
+        <div>
+          <div style="font-weight:800;font-size:17px;color:#fff;">Get Started with Blaze256</div>
+          <div id="payPlanLabel" style="font-size:12px;color:#f97316;font-weight:600;"></div>
+        </div>
+      </div>
+
+      <form id="payForm" onsubmit="submitPayForm(event)">
+        <div style="display:grid;gap:14px;">
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Full Name *</label>
+            <input id="payName" type="text" required placeholder="e.g. John Mukasa" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#f97316'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Email Address *</label>
+            <input id="payEmail" type="email" required placeholder="you@company.com" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#f97316'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Company / Business Name *</label>
+            <input id="payCompany" type="text" required placeholder="e.g. Kampala Motors Ltd" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#f97316'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Phone Number (WhatsApp) *</label>
+            <input id="payPhone" type="tel" required placeholder="+256 7XX XXX XXX" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#f97316'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+          </div>
+          <div>
+            <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Website URL</label>
+            <input id="payWebsite" type="url" placeholder="https://yoursite.com" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#f97316'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+          </div>
+        </div>
+        <button type="submit" style="width:100%;margin-top:20px;padding:14px;background:linear-gradient(135deg,#f97316,#ec4899);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;letter-spacing:-.01em;">Continue to Payment →</button>
+      </form>
+    </div>
+
+    <!-- Step 2: Payment Instructions -->
+    <div id="payStep2" style="display:none;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="font-size:40px;margin-bottom:10px;">📱</div>
+        <div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:6px;">Send Payment via MTN MoMo</div>
+        <div id="payStep2Plan" style="font-size:13px;color:rgba(255,255,255,0.5);"></div>
+      </div>
+
+      <div style="background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.25);border-radius:14px;padding:20px;margin-bottom:20px;">
+        <div style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">MTN Mobile Money Details</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span style="color:rgba(255,255,255,0.6);font-size:13px;">Send To:</span>
+          <span style="color:#fff;font-weight:800;font-size:16px;letter-spacing:.05em;">0704 923 640</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span style="color:rgba(255,255,255,0.6);font-size:13px;">Name:</span>
+          <span style="color:#fff;font-weight:700;font-size:13px;">Phoenix MEDIA</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:rgba(255,255,255,0.6);font-size:13px;">Amount:</span>
+          <span id="payAmountDisplay" style="color:#f97316;font-weight:900;font-size:18px;"></span>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:20px;">
+        <div style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Steps</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:12px;align-items:flex-start;"><span style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;">1</span><span style="font-size:13px;color:rgba(255,255,255,0.7);">Dial *165# on your MTN line and send <strong style="color:#fff;">UGX <span class="pay-amt"></span></strong> to <strong style="color:#fff;">0704 923 640</strong></span></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;"><span style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;">2</span><span style="font-size:13px;color:rgba(255,255,255,0.7);">Copy the <strong style="color:#fff;">transaction ID</strong> from your MoMo confirmation SMS</span></div>
+          <div style="display:flex;gap:12px;align-items:flex-start;"><span style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;">3</span><span style="font-size:13px;color:rgba(255,255,255,0.7);">Paste it below and submit — we'll activate your widget within <strong style="color:#fff;">2 hours</strong></span></div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">MoMo Transaction ID *</label>
+        <input id="payTxnId" type="text" required placeholder="e.g. MP2506251234567" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#f97316'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+      </div>
+
+      <button onclick="submitPayment()" id="paySubmitBtn" style="width:100%;padding:14px;background:linear-gradient(135deg,#f97316,#ec4899);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;">✅ Confirm Payment & Activate</button>
+      <button onclick="goBackStep1()" style="width:100%;margin-top:10px;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:12px;color:rgba(255,255,255,0.5);font-size:13px;cursor:pointer;">← Go Back</button>
+    </div>
+
+    <!-- Step 3: Success -->
+    <div id="payStep3" style="display:none;text-align:center;padding:20px 0;">
+      <div style="font-size:60px;margin-bottom:16px;">🎉</div>
+      <div style="font-weight:800;font-size:22px;color:#fff;margin-bottom:10px;">Payment Submitted!</div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:24px;line-height:1.7;">Thank you! We've received your payment confirmation and will activate your Blaze256 AI agent within <strong style="color:#f97316;">2 hours</strong>.<br><br>Check your WhatsApp and email for your widget embed code.</div>
+      <button onclick="closePayModal()" style="padding:12px 32px;background:linear-gradient(135deg,#f97316,#ec4899);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;">Done 🔥</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _payPlan = '', _payAmount = 0, _payClientData = {};
+
+function openPayModal(plan, amount) {
+  _payPlan = plan;
+  _payAmount = amount;
+  document.getElementById('payPlanLabel').textContent = plan + ' Plan — UGX ' + amount.toLocaleString() + '/mo';
+  document.getElementById('payAmountDisplay').textContent = 'UGX ' + amount.toLocaleString() + '/mo';
+  document.querySelectorAll('.pay-amt').forEach(function(el){ el.textContent = amount.toLocaleString(); });
+  document.getElementById('payStep1').style.display = 'block';
+  document.getElementById('payStep2').style.display = 'none';
+  document.getElementById('payStep3').style.display = 'none';
+  document.getElementById('payModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closePayModal() {
+  document.getElementById('payModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function goBackStep1() {
+  document.getElementById('payStep2').style.display = 'none';
+  document.getElementById('payStep1').style.display = 'block';
+}
+
+function submitPayForm(e) {
+  e.preventDefault();
+  _payClientData = {
+    name: document.getElementById('payName').value,
+    email: document.getElementById('payEmail').value,
+    company: document.getElementById('payCompany').value,
+    phone: document.getElementById('payPhone').value,
+    website: document.getElementById('payWebsite').value,
+    plan: _payPlan,
+    amount: _payAmount
+  };
+  document.getElementById('payStep2Plan').textContent = _payPlan + ' Plan — UGX ' + _payAmount.toLocaleString() + '/month';
+  document.getElementById('payStep1').style.display = 'none';
+  document.getElementById('payStep2').style.display = 'block';
+}
+
+function submitPayment() {
+  var txnId = document.getElementById('payTxnId').value.trim();
+  if (!txnId) { alert('Please enter your MoMo Transaction ID'); return; }
+
+  var btn = document.getElementById('paySubmitBtn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  // Send to backend
+  // Build WhatsApp notification message
+  var waMsg = encodeURIComponent(
+    '🔥 NEW BLAZE256 PAYMENT!\n\n' +
+    '👤 Name: ' + _payClientData.name + '\n' +
+    '📧 Email: ' + _payClientData.email + '\n' +
+    '📱 Phone: ' + _payClientData.phone + '\n' +
+    '🏢 Company: ' + (_payClientData.company || 'N/A') + '\n' +
+    '🌐 Website: ' + (_payClientData.website || 'N/A') + '\n' +
+    '📦 Plan: ' + _payClientData.plan + ' — UGX ' + Number(_payClientData.amount).toLocaleString() + '/mo\n' +
+    '💳 MoMo TXN ID: ' + txnId + '\n\n' +
+    '✅ Verify payment and send widget embed code!'
+  );
+  // Open WhatsApp in background tab to notify you
+  window.open('https://wa.me/256704923640?text=' + waMsg, '_blank');
+  // Show success
+  document.getElementById('payStep2').style.display = 'none';
+  document.getElementById('payStep3').style.display = 'block';
+  btn.textContent = '✅ Confirm Payment & Activate';
+  btn.disabled = false;
+}
+
+// Close on backdrop click
+document.getElementById('payModal').addEventListener('click', function(e) {
+  if (e.target === this) closePayModal();
+});
+</script>
+
 </body>
 </html>
