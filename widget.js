@@ -332,7 +332,7 @@
       '<input id="nai-input" type="text" placeholder="Type a message..." autocomplete="off" maxlength="500"/>' +
       '<button id="nai-send" aria-label="Send">&#10148;</button>' +
     '</div>' +
-    '<div id="nai-powered">Powered by <a href="https://nexus-cpu-arch.github.io/nexusai/site/" target="_blank">NexusAI</a></div>';
+    '<div id="nai-powered">Powered by <a href="https://blaze256.com/site/" target="_blank">NexusAI</a></div>';
 
   document.body.appendChild(btn);
   document.body.appendChild(box);
