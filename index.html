@@ -822,40 +822,75 @@ function copyCode() {
 
     <!-- Step 2: Payment Instructions -->
     <div id="payStep2" style="display:none;">
-      <div style="text-align:center;margin-bottom:24px;">
-        <div style="font-size:40px;margin-bottom:10px;">📱</div>
-        <div style="font-weight:800;font-size:18px;color:#fff;margin-bottom:6px;">Send Payment via MTN MoMo</div>
-        <div id="payStep2Plan" style="font-size:13px;color:rgba(255,255,255,0.5);"></div>
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="font-size:36px;margin-bottom:8px;">📱</div>
+        <div style="font-weight:800;font-size:17px;color:#fff;margin-bottom:4px;">Send Mobile Money Payment</div>
+        <div id="payStep2Plan" style="font-size:12px;color:rgba(255,255,255,0.5);"></div>
       </div>
 
-      <div style="background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.25);border-radius:14px;padding:20px;margin-bottom:20px;">
-        <div style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">MTN Mobile Money Details</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <span style="color:rgba(255,255,255,0.6);font-size:13px;">Send To:</span>
-          <span style="color:#fff;font-weight:800;font-size:16px;letter-spacing:.05em;">0704 923 640</span>
+      <!-- Network Tabs -->
+      <div style="display:flex;gap:8px;margin-bottom:16px;">
+        <button id="tabMTN" onclick="switchPayTab('MTN')" style="flex:1;padding:10px;border-radius:10px;border:2px solid #ffcc00;background:rgba(255,204,0,0.12);color:#ffcc00;font-weight:800;font-size:13px;cursor:pointer;">📲 MTN MoMo</button>
+        <button id="tabAirtel" onclick="switchPayTab('Airtel')" style="flex:1;padding:10px;border-radius:10px;border:2px solid rgba(255,255,255,0.12);background:transparent;color:rgba(255,255,255,0.4);font-weight:800;font-size:13px;cursor:pointer;">📲 Airtel Money</button>
+      </div>
+
+      <!-- MTN Panel -->
+      <div id="panelMTN">
+        <div style="background:rgba(255,204,0,0.07);border:1px solid rgba(255,204,0,0.25);border-radius:14px;padding:18px;margin-bottom:14px;">
+          <div style="font-size:11px;color:rgba(255,204,0,0.7);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">MTN Mobile Money</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="color:rgba(255,255,255,0.55);font-size:13px;">Send To:</span>
+            <span style="color:#fff;font-weight:900;font-size:17px;letter-spacing:.06em;">0775 691 815</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="color:rgba(255,255,255,0.55);font-size:13px;">Name:</span>
+            <span style="color:#fff;font-weight:700;font-size:13px;">Phoenix MEDIA</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:rgba(255,255,255,0.55);font-size:13px;">Amount:</span>
+            <span id="payAmountDisplay" style="color:#f97316;font-weight:900;font-size:18px;"></span>
+          </div>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <span style="color:rgba(255,255,255,0.6);font-size:13px;">Name:</span>
-          <span style="color:#fff;font-weight:700;font-size:13px;">Phoenix MEDIA</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="color:rgba(255,255,255,0.6);font-size:13px;">Amount:</span>
-          <span id="payAmountDisplay" style="color:#f97316;font-weight:900;font-size:18px;"></span>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px;margin-bottom:14px;">
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;"><span style="background:#ffcc00;color:#000;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;">1</span><span style="font-size:12.5px;color:rgba(255,255,255,0.7);">Dial <strong style="color:#fff;">*165#</strong> → Send Money → Enter <strong style="color:#fff;">0775691815</strong></span></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;"><span style="background:#ffcc00;color:#000;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;">2</span><span style="font-size:12.5px;color:rgba(255,255,255,0.7);">Send <strong style="color:#fff;">UGX <span class="pay-amt"></span></strong> and note the TXN ID from your SMS</span></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;"><span style="background:#ffcc00;color:#000;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;">3</span><span style="font-size:12.5px;color:rgba(255,255,255,0.7);">Paste TXN ID below and submit</span></div>
+          </div>
         </div>
       </div>
 
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:20px;">
-        <div style="font-size:12px;color:rgba(255,255,255,0.4);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Steps</div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="display:flex;gap:12px;align-items:flex-start;"><span style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;">1</span><span style="font-size:13px;color:rgba(255,255,255,0.7);">Dial *165# on your MTN line and send <strong style="color:#fff;">UGX <span class="pay-amt"></span></strong> to <strong style="color:#fff;">0704 923 640</strong></span></div>
-          <div style="display:flex;gap:12px;align-items:flex-start;"><span style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;">2</span><span style="font-size:13px;color:rgba(255,255,255,0.7);">Copy the <strong style="color:#fff;">transaction ID</strong> from your MoMo confirmation SMS</span></div>
-          <div style="display:flex;gap:12px;align-items:flex-start;"><span style="background:#f97316;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;">3</span><span style="font-size:13px;color:rgba(255,255,255,0.7);">Paste it below and submit — we'll activate your widget within <strong style="color:#fff;">2 hours</strong></span></div>
+      <!-- Airtel Panel -->
+      <div id="panelAirtel" style="display:none;">
+        <div style="background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.25);border-radius:14px;padding:18px;margin-bottom:14px;">
+          <div style="font-size:11px;color:rgba(220,100,100,0.9);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;">Airtel Money</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="color:rgba(255,255,255,0.55);font-size:13px;">Send To:</span>
+            <span style="color:#fff;font-weight:900;font-size:17px;letter-spacing:.06em;">0704 677 222</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="color:rgba(255,255,255,0.55);font-size:13px;">Name:</span>
+            <span style="color:#fff;font-weight:700;font-size:13px;">Phoenix MEDIA</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:rgba(255,255,255,0.55);font-size:13px;">Amount:</span>
+            <span class="payAmountDisplayAirtel" style="color:#f97316;font-weight:900;font-size:18px;"></span>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px;margin-bottom:14px;">
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;"><span style="background:#dc2626;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;">1</span><span style="font-size:12.5px;color:rgba(255,255,255,0.7);">Dial <strong style="color:#fff;">*185#</strong> → Send Money → Enter <strong style="color:#fff;">0704677222</strong></span></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;"><span style="background:#dc2626;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;">2</span><span style="font-size:12.5px;color:rgba(255,255,255,0.7);">Send <strong style="color:#fff;">UGX <span class="pay-amt"></span></strong> and note the TXN ID from your SMS</span></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;"><span style="background:#dc2626;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;">3</span><span style="font-size:12.5px;color:rgba(255,255,255,0.7);">Paste TXN ID below and submit</span></div>
+          </div>
         </div>
       </div>
 
+      <!-- TXN ID input -->
       <div style="margin-bottom:16px;">
-        <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">MoMo Transaction ID *</label>
+        <label style="font-size:12px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Transaction ID *</label>
         <input id="payTxnId" type="text" required placeholder="e.g. MP2506251234567" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#f97316'" onblur="this.style.borderColor='rgba(255,255,255,0.12)'"/>
+        <div id="payNetworkLabel" style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:5px;">Selected network: <span id="payNetworkName">MTN</span></div>
       </div>
 
       <button onclick="submitPayment()" id="paySubmitBtn" style="width:100%;padding:14px;background:linear-gradient(135deg,#f97316,#ec4899);border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:800;cursor:pointer;">✅ Confirm Payment & Activate</button>
@@ -880,6 +915,7 @@ function openPayModal(plan, amount) {
   _payAmount = amount;
   document.getElementById('payPlanLabel').textContent = plan + ' Plan — UGX ' + amount.toLocaleString() + '/mo';
   document.getElementById('payAmountDisplay').textContent = 'UGX ' + amount.toLocaleString() + '/mo';
+  document.querySelectorAll('.payAmountDisplayAirtel').forEach(function(el){ el.textContent = 'UGX ' + amount.toLocaleString() + '/mo'; });
   document.querySelectorAll('.pay-amt').forEach(function(el){ el.textContent = amount.toLocaleString(); });
   document.getElementById('payStep1').style.display = 'block';
   document.getElementById('payStep2').style.display = 'none';
@@ -914,16 +950,42 @@ function submitPayForm(e) {
   document.getElementById('payStep2').style.display = 'block';
 }
 
+var _payNetwork = 'MTN';
+
+function switchPayTab(network) {
+  _payNetwork = network;
+  document.getElementById('payNetworkName').textContent = network;
+  if (network === 'MTN') {
+    document.getElementById('panelMTN').style.display = 'block';
+    document.getElementById('panelAirtel').style.display = 'none';
+    document.getElementById('tabMTN').style.borderColor = '#ffcc00';
+    document.getElementById('tabMTN').style.background = 'rgba(255,204,0,0.12)';
+    document.getElementById('tabMTN').style.color = '#ffcc00';
+    document.getElementById('tabAirtel').style.borderColor = 'rgba(255,255,255,0.12)';
+    document.getElementById('tabAirtel').style.background = 'transparent';
+    document.getElementById('tabAirtel').style.color = 'rgba(255,255,255,0.4)';
+  } else {
+    document.getElementById('panelMTN').style.display = 'none';
+    document.getElementById('panelAirtel').style.display = 'block';
+    document.getElementById('tabAirtel').style.borderColor = '#dc2626';
+    document.getElementById('tabAirtel').style.background = 'rgba(220,38,38,0.12)';
+    document.getElementById('tabAirtel').style.color = '#ff6b6b';
+    document.getElementById('tabMTN').style.borderColor = 'rgba(255,255,255,0.12)';
+    document.getElementById('tabMTN').style.background = 'transparent';
+    document.getElementById('tabMTN').style.color = 'rgba(255,255,255,0.4)';
+  }
+}
+
 function submitPayment() {
   var txnId = document.getElementById('payTxnId').value.trim();
-  if (!txnId) { alert('Please enter your MoMo Transaction ID'); return; }
+  if (!txnId) { alert('Please enter your Transaction ID'); return; }
 
   var btn = document.getElementById('paySubmitBtn');
   btn.textContent = 'Submitting...';
   btn.disabled = true;
 
-  // Send to backend
-  // Build WhatsApp notification message
+  var networkNum = _payNetwork === 'MTN' ? '0775691815' : '0704677222';
+
   var waMsg = encodeURIComponent(
     '🔥 NEW BLAZE256 PAYMENT!\n\n' +
     '👤 Name: ' + _payClientData.name + '\n' +
@@ -932,12 +994,11 @@ function submitPayment() {
     '🏢 Company: ' + (_payClientData.company || 'N/A') + '\n' +
     '🌐 Website: ' + (_payClientData.website || 'N/A') + '\n' +
     '📦 Plan: ' + _payClientData.plan + ' — UGX ' + Number(_payClientData.amount).toLocaleString() + '/mo\n' +
-    '💳 MoMo TXN ID: ' + txnId + '\n\n' +
-    '✅ Verify payment and send widget embed code!'
+    '💳 Network: ' + _payNetwork + ' (' + networkNum + ')\n' +
+    '🧾 TXN ID: ' + txnId + '\n\n' +
+    '✅ Verify & send widget embed code!'
   );
-  // Open WhatsApp in background tab to notify you
   window.open('https://wa.me/256704923640?text=' + waMsg, '_blank');
-  // Show success
   document.getElementById('payStep2').style.display = 'none';
   document.getElementById('payStep3').style.display = 'block';
   btn.textContent = '✅ Confirm Payment & Activate';
