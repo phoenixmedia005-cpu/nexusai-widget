@@ -207,7 +207,7 @@
     .pricing-header .sec-eyebrow{justify-content:center}
     .pricing-header h2{margin-bottom:10px}
     .pricing-header p{margin:0 auto;text-align:center}
-    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+    .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
     .plan{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;position:relative;transition:border-color .2s,transform .2s}
     .plan:hover{transform:translateY(-4px)}
     .plan.featured{border-color:var(--accent);background:linear-gradient(160deg,rgba(249,115,22,.06) 0%,var(--surface) 50%)}
@@ -651,6 +651,26 @@
           <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account manager</li>
         </ul>
         <a href="https://wa.me/256704923640?text=Hi!%20I%27d%20like%20to%20discuss%20an%20Enterprise%20plan%20for%20Blaze256" target="_blank" class="plan-cta ghost" onclick="naiTrack('plan_click','pricing','enterprise')">Contact Sales</a>
+      
+      <div class="plan" style="border-color:#6366f1;background:linear-gradient(160deg,rgba(99,102,241,.08) 0%,var(--surface) 50%)">
+        <div class="plan-badge" style="background:#6366f1">🤖 New Feature</div>
+        <div class="plan-tier" style="color:#818cf8">Web Admin</div>
+        <div class="plan-price-row">
+          <div class="plan-price">UGX 250K</div>
+          <div class="plan-period">/mo</div>
+        </div>
+        <div class="plan-desc">Let AI manage and protect your website via Telegram. No developer needed — ever again.</div>
+        <div class="plan-rule"></div>
+        <ul class="plan-list">
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>AI edits your site via Telegram</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Add &amp; remove content via chat</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>WordPress &amp; GitHub Pages support</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>24/7 Cyber Shield monitoring</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Defacement &amp; hack detection</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Instant Telegram alerts</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Auto site-down notifications</li>
+        </ul>
+        <button class="plan-cta solid" style="background:#6366f1" onclick="naiTrack('plan_click','pricing','webadmin');window.open('https://t.me/blaze256admin_bot','_blank')">Activate Web Admin</button>
       </div>
     </div>
   </div>
